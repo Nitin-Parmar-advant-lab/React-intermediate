@@ -8,12 +8,14 @@ const INITIAL_INPUT = {
     annualInvestment: 1000,
     expectedReturn: 60,
     duration: 6,
+    isYearly: true,
 };
 
 function App() {
     const [useInput, setUserInput] = useState(INITIAL_INPUT);
+    // const [initialDuration, setDuration] = useState("Y");
 
-    const inputValid = (useInput.duration >= 1);
+    const inputValid = useInput.duration >= 1;
 
     function handleUserInput(inputField, value) {
         // const val = event.f.value
@@ -21,7 +23,8 @@ function App() {
         setUserInput((inputChange) => {
             return {
                 ...inputChange,
-                [inputField]: +value,
+                [inputField]:
+                    inputField === "isYearly" ? !inputChange.isYearly : +value,
             };
         });
     }
@@ -29,11 +32,15 @@ function App() {
     return (
         <>
             <Header />
-            <Input userInput={useInput} onInputChange={handleUserInput} />
+            <Input
+                userInput={useInput}
+                onInputChange={handleUserInput}
+                // handleDurationUpdate={handleDurationUpdate}
+            />
 
-            {!inputValid && 
+            {!inputValid && (
                 <p className="center"> Enter duration greater than zero </p>
-            }
+            )}
             {inputValid && <Result resultsData={useInput} />}
         </>
     );

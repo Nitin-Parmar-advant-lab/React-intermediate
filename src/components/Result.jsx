@@ -10,11 +10,16 @@ export default function Result({ resultsData }) {
         <table id="result">
             <thead>
                 <tr>
-                    <th>Year</th>
+                    <th>{resultsData.isYearly ? "Year" : "Month"}</th>
                     <th>Investment Value</th>
-                    <th>Interest (Year)</th>
+                    <th>
+                        {" "}
+                        Interest
+                        {resultsData.isYearly ? " (Year)" : " (Month)"}
+                    </th>
                     <th>Total Interest</th>
                     <th>Invested Capital</th>
+                    {!resultsData.isYearly && <th>Interest (Monthly)</th>}
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +31,8 @@ export default function Result({ resultsData }) {
 
                     const totalAmountInvested =
                         resultRow.valueEndOfYear - totalInterest;
+
+                    const monthlyInterest = resultRow.interest / 12;
                     return (
                         <tr key={resultRow.year}>
                             <td>{resultRow.year}</td>
@@ -35,6 +42,10 @@ export default function Result({ resultsData }) {
                             <td>{formatter.format(resultRow.interest)}</td>
                             <td>{formatter.format(totalInterest)}</td>
                             <td>{formatter.format(totalAmountInvested)}</td>
+
+                            {!resultsData.isYearly && (
+                                <td>{formatter.format(monthlyInterest)}</td>
+                            )}
                         </tr>
                     );
                 })}

@@ -1,27 +1,75 @@
 
-export default function Input({onInputChange, userInput}) {
-
-    
+export default function Input({
+    onInputChange,
+    userInput,
+}) {
     return (
         <section id="user-input">
             <div className="input-group">
                 <p>
                     <label>Initial Investment</label>
-                    <input type="number" value={userInput.initialInvestment} required onChange={(event) => onInputChange("initialInvestment", event.target.value)}/>
+                    <input
+                        type="number"
+                        value={userInput.initialInvestment}
+                        required
+                        onChange={(event) =>
+                            onInputChange(
+                                "initialInvestment",
+                                event.target.value,
+                            )
+                        }
+                    />
                 </p>
                 <p>
                     <label>Annual Investment</label>
-                    <input type="number" value={userInput.annualInvestment} required onChange={(event) => onInputChange("annualInvestment", event.target.value)}/>
+                    <input
+                        type="number"
+                        value={userInput.annualInvestment}
+                        required
+                        onChange={(event) =>
+                            onInputChange(
+                                "annualInvestment",
+                                event.target.value,
+                            )
+                        }
+                    />
                 </p>
             </div>
             <div className="input-group">
                 <p>
                     <label>Expected Return</label>
-                    <input type="number" value={userInput.expectedReturn} required onChange={(event) => onInputChange("expectedReturn", event.target.value)}/>
+                    <input
+                        type="number"
+                        value={userInput.expectedReturn}
+                        required
+                        onChange={(event) =>
+                            onInputChange("expectedReturn", event.target.value)
+                        }
+                    />
+                </p>
+                <p>
+                    <button
+                        type="button"
+                        className="toggle-btn"
+                        onClick={() => onInputChange("isYearly")}
+                    >
+                        {userInput.isYearly ? (
+                            <span className="toggle-option active">Annual</span>
+                        ) : (
+                            <span className="toggle-option">Monthly</span>
+                        )}
+                    </button>
                 </p>
                 <p>
                     <label>Duration</label>
-                    <input type="number" value={userInput.duration} required onChange={(event) => onInputChange("duration", event.target.value)}/>
+                    <input
+                        type="number"
+                        value={userInput.duration}
+                        required
+                        onChange={(event) =>
+                            onInputChange("duration", event.target.value)
+                        }
+                    />
                 </p>
             </div>
         </section>
